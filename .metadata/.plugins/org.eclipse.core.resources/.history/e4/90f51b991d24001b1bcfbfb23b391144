@@ -1,0 +1,5 @@
+package com.org.dxc.dao;
+
+public interface IPLRepository {
+
+}

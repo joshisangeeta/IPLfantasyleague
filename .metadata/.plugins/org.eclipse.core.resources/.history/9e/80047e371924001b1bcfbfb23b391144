@@ -1,0 +1,32 @@
+package com.org.dxc.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+@Table(name = "TeamPoints_Table")
+public class TeamPointsTable {
+	
+	@Id
+	@GenericGenerator(name="auto",strategy="increment")
+	@GeneratedValue(generator="auto")
+	@Column(name = "team_Id")
+	private int id;
+	@Column(name = "team_name")
+	private String teamName;
+	@Column(name = "matches_played")
+	private int matchesPlayed;
+	@Column(name = "matches_won")
+	private int matchesWon;
+	@Column(name = "matches_lost")
+	private int matchesLost;
+	@Column(name = "matches_drawn")
+	private int matchesDrawn;
+	private int points;
+
+}

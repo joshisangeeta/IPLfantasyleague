@@ -1,0 +1,6 @@
+package com.org.dxc.model;
+
+@Enti
+public class Tournament {
+
+}
