@@ -1,0 +1,36 @@
+package com.org.dxc.model;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+public class Bidder {
+	
+	@Id
+	@GenericGenerator(name="auto",strategy="increment")
+	@GeneratedValue(generator="auto")
+	private int bidderId;
+	private String name;
+	private String email;
+	private long phoneNo;
+	private String password;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(referencedColumnName = "bidderId")
+	private List<BiddingDetails> bidderList;
+	public Bidder() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+	
+
+}

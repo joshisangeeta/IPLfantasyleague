@@ -1,0 +1,32 @@
+package com.org.dxc.model;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+
+import org.hibernate.annotations.GenericGenerator;
+
+@Entity
+public class Tournament {
+	
+	@Id
+	@GenericGenerator(name="auto",strategy="increment")
+	@GeneratedValue(generator="auto")
+	private int tournamentId;
+	@Column(name = "number_of_qualifiers")
+	private int numberOfQualifier;
+	@Column(name = "number_of_teams")
+	private int numberOfTeams;
+	@Column(name = "number_of_matches_completed")
+	private int numberOfMatchesCompleted;
+	@OneToMany(cascade = CascadeType.ALL)
+	@JoinColumn(referencedColumnName = "tournamentId")
+	private List<MatchDetails> matchList;
+
+}

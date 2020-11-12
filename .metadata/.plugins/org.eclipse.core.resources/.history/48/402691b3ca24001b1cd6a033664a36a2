@@ -1,0 +1,16 @@
+package com.org.dxc.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.org.dxc.dao.AdminRepository;
+import com.org.dxc.dao.BiddingDetailsRepository;
+
+@Service
+public class IPLServiceImp implements IPLService {
+	
+	@Autowired
+	AdminRepository admin;
+	
+
+}

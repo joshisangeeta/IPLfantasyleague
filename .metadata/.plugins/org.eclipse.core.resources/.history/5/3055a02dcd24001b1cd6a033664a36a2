@@ -1,0 +1,9 @@
+package com.org.dxc.dao;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import com.org.dxc.model.TeamDetails;
+@EnableJpaRepositories
+public interface TeamDetailsRepository extends JpaRepository<TeamDetails, Integer> {
+
+}
