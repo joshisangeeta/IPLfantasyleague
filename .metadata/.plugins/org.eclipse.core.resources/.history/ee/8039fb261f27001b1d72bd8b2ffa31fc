@@ -1,0 +1,83 @@
+package com.org.dxc.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.org.dxc.model.Admin;
+import com.org.dxc.model.Bidder;
+import com.org.dxc.model.BiddingDetails;
+import com.org.dxc.model.Leaderboard;
+import com.org.dxc.model.MatchDetails;
+import com.org.dxc.model.TeamDetails;
+import com.org.dxc.model.Tournament;
+import com.org.dxc.service.IPLService;
+
+@RestController
+public class WebController {
+	
+	@Autowired
+	IPLService iplService;
+	
+	@GetMapping("/adminlogin/{username}")
+	public List<Admin> adminLogin(@PathVariable String userName) {
+		return iplService.adminLogin(userName);
+	}
+	
+	@PostMapping("/biddersignup")
+	public Bidder bidderSignUp(@RequestBody Bidder bidder) {
+		return iplService.bidderSignUp(bidder);
+	}
+	
+	@GetMapping("/bidderlogin/{id}")
+	public Bidder bidderLogin(@PathVariable int id) {
+		return iplService.getBidderById(id);
+	}
+	
+	@GetMapping("/tournament/{id}")
+	public Tournament getTournamentById(@PathVariable int id) {
+		return iplService.getTournamentById(id);
+	}
+	
+	@PostMapping("/tournament")
+	public Tournament addTournament(@RequestBody Tournament tournament) {
+		return iplService.addTournament(tournament);
+	}
+	
+	@PutMapping("/tournament")
+	public Tournament updateTournament(@RequestBody Tournament tournament) {
+		return iplService.updateTournament(tournament);
+	}
+	
+	@GetMapping("/teamdetails/{id}")
+	public TeamDetails getTeamDetails(@PathVariable int id) {
+		return iplService.getTeamDetails(id);
+	}
+	
+	@GetMapping("/matchdetails/{id}")
+	public MatchDetails getMatchDetails(@PathVariable int id) {
+		return iplService.getMatchDetails(id);
+	}
+	
+	@GetMapping("/leaderboard")
+	public List<Leaderboard> getLeaderboard() {
+		return iplService.getLeaderboard();
+	}
+	
+	@GetMapping("/getBiddingDetails/{id}")
+	public BiddingDetails getBiddingDetails(@PathVariable int id) {
+		return null;
+	}
+	
+	@PutMapping("/result")
+	public MatchDetails resultDeclare(@RequestBody MatchDetails result) {
+		return iplService.resultDeclare(result);
+	}
+	
+}

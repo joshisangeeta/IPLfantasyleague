@@ -1,0 +1,9 @@
+package com.org.dxc.service;
+
+import com.org.dxc.model.Admin;
+
+public interface IPLService {
+
+	public Admin adminLogin();
+
+}

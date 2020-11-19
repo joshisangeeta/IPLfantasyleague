@@ -1,0 +1,102 @@
+package com.org.dxc.service;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.org.dxc.dao.AdminRepository;
+import com.org.dxc.dao.BidderRepository;
+import com.org.dxc.dao.BiddingDetailsRepository;
+import com.org.dxc.dao.LeaderboardRepository;
+import com.org.dxc.dao.MatchDetailsRepository;
+import com.org.dxc.dao.TeamDetailsRepository;
+import com.org.dxc.dao.TournamentRepository;
+import com.org.dxc.model.Admin;
+import com.org.dxc.model.Bidder;
+import com.org.dxc.model.Leaderboard;
+import com.org.dxc.model.MatchDetails;
+import com.org.dxc.model.TeamDetails;
+import com.org.dxc.model.Tournament;
+
+@Service
+public class IPLServiceImp implements IPLService {
+	
+@Autowired
+AdminRepository adminRepository;
+
+@Autowired
+BidderRepository bidderRepository;
+
+@Autowired
+BiddingDetailsRepository biddingDetails;
+
+@Autowired
+LeaderboardRepository leaderboardRepository;
+
+@Autowired
+MatchDetailsRepository matchDetailsRepository;
+
+@Autowired
+TeamDetailsRepository teamDetailsRepository;
+
+@Autowired
+TournamentRepository tournamentRepository;
+
+@Override
+public Admin adminLogin(int id) {
+	// TODO Auto-generated method stub
+	return adminRepository.findById(id).get();
+}
+
+@Override
+public Bidder bidderSignUp(Bidder bidder) {
+	// TODO Auto-generated method stub
+	return bidderRepository.save(bidder);
+}
+
+@Override
+public Bidder getBidderById(int id) {
+	// TODO Auto-generated method stub
+	return bidderRepository.findById(id).get();
+}
+
+@Override
+public Tournament getTournamentById(int id) {
+	// TODO Auto-generated method stub
+	return tournamentRepository.findById(id).get();
+}
+
+@Override
+public TeamDetails getTeamDetails(int id) {
+	// TODO Auto-generated method stub
+	return teamDetailsRepository.findById(id).get();
+}
+
+@Override
+public MatchDetails getMatchDetails(int id) {
+	// TODO Auto-generated method stub
+	return matchDetailsRepository.findById(id).get();
+}
+
+@Override
+public List<Leaderboard> getLeaderboard() {
+	// TODO Auto-generated method stub
+	return leaderboardRepository.findAll();
+}
+
+@Override
+public Tournament addTournament(Tournament tournament) {
+	// TODO Auto-generated method stub
+	return tournamentRepository.save(tournament);
+}
+
+@Override
+public Tournament updateTournament(Tournament tournament) {
+	// TODO Auto-generated method stub
+	Tournament toUpdate=tournamentRepository.findById(tournament.getTournamentId()).get();
+	toUpdate.setNumberOfMatchesCompleted(tournament.getNumberOfMatchesCompleted());
+	return tournamentRepository.save(toUpdate);
+}
+
+}

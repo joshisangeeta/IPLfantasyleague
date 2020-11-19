@@ -1,0 +1,34 @@
+package com.org.dxc.service;
+
+import java.util.List;
+
+import com.org.dxc.model.Admin;
+import com.org.dxc.model.Bidder;
+import com.org.dxc.model.Leaderboard;
+import com.org.dxc.model.MatchDetails;
+import com.org.dxc.model.TeamDetails;
+import com.org.dxc.model.Tournament;
+
+public interface IPLService {
+
+	public Admin adminLogin(String userName);
+
+	public Bidder bidderSignUp(Bidder bidder);
+
+	public Bidder bidderLogin(String email,String password);
+
+	public Tournament getTournamentById(int id);
+
+	public TeamDetails getTeamDetails(int id);
+
+	public MatchDetails getMatchDetails(int id);
+
+	public List<Leaderboard> getLeaderboard();
+
+	public Tournament addTournament(Tournament tournament);
+
+	public Tournament updateTournament(Tournament tournament);
+
+	public MatchDetails resultDeclare(MatchDetails result);
+
+}

@@ -23,17 +23,19 @@ public class Bidder {
 	private String email;
 	private long phoneNo;
 	private String password;
+	private String opinion;
 	public Bidder() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public Bidder(int bidderId, String name, String email, long phoneNo, String password) {
+	public Bidder(int bidderId, String name, String email, long phoneNo, String password, String opinion) {
 		super();
 		this.bidderId = bidderId;
 		this.name = name;
 		this.email = email;
 		this.phoneNo = phoneNo;
 		this.password = password;
+		this.opinion = opinion;
 	}
 	public int getBidderId() {
 		return bidderId;
@@ -65,6 +67,12 @@ public class Bidder {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public String getOpinion() {
+		return opinion;
+	}
+	public void setOpinion(String opinion) {
+		this.opinion = opinion;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -72,6 +80,7 @@ public class Bidder {
 		result = prime * result + bidderId;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((name == null) ? 0 : name.hashCode());
+		result = prime * result + ((opinion == null) ? 0 : opinion.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + (int) (phoneNo ^ (phoneNo >>> 32));
 		return result;
@@ -97,6 +106,11 @@ public class Bidder {
 				return false;
 		} else if (!name.equals(other.name))
 			return false;
+		if (opinion == null) {
+			if (other.opinion != null)
+				return false;
+		} else if (!opinion.equals(other.opinion))
+			return false;
 		if (password == null) {
 			if (other.password != null)
 				return false;
@@ -109,11 +123,8 @@ public class Bidder {
 	@Override
 	public String toString() {
 		return "Bidder [bidderId=" + bidderId + ", name=" + name + ", email=" + email + ", phoneNo=" + phoneNo
-				+ ", password=" + password + "]";
+				+ ", password=" + password + ", opinion=" + opinion + "]";
 	}
-	
-	
-	
 	
 
 }

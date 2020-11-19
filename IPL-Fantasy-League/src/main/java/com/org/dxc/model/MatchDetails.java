@@ -26,42 +26,30 @@ public class MatchDetails {
 	private String teamOne;
 	private String teamTwo;
 	private Date date;
-	@Column(name = "start_time")
-	private Time startTime;
-	@Column(name = "end_time")
-	private Time endTime;
+	private String start_time;
+	private String end_time;
 	private String stadium;
 	private String winner;
 	private String status;
 	private String delay;
-	@OneToOne(cascade = CascadeType.ALL)
-	private BiddingDetails bid;
-	@OneToMany(cascade = CascadeType.ALL)
-	@JoinColumn(referencedColumnName = "matchId")
-	private List<BiddingDetails> biddingMatchId;
 	public MatchDetails() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	public MatchDetails(int matchId, String teamOne, String teamTwo, Date date, Time startTime, Time endTime,
-			String stadium, String winner, String status, String delay, BiddingDetails bid,
-			List<BiddingDetails> biddingMatchId) {
+	public MatchDetails(int matchId, String teamOne, String teamTwo, Date date, String start_time, String end_time,
+			String stadium, String winner, String status, String delay) {
 		super();
 		this.matchId = matchId;
 		this.teamOne = teamOne;
 		this.teamTwo = teamTwo;
 		this.date = date;
-		this.startTime = startTime;
-		this.endTime = endTime;
+		this.start_time = start_time;
+		this.end_time = end_time;
 		this.stadium = stadium;
 		this.winner = winner;
 		this.status = status;
 		this.delay = delay;
-		this.bid = bid;
-		this.biddingMatchId = biddingMatchId;
 	}
-
 	public int getMatchId() {
 		return matchId;
 	}
@@ -86,17 +74,17 @@ public class MatchDetails {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	public Time getStartTime() {
-		return startTime;
+	public String getStart_time() {
+		return start_time;
 	}
-	public void setStartTime(Time startTime) {
-		this.startTime = startTime;
+	public void setStart_time(String start_time) {
+		this.start_time = start_time;
 	}
-	public Time getEndTime() {
-		return endTime;
+	public String getEnd_time() {
+		return end_time;
 	}
-	public void setEndTime(Time endTime) {
-		this.endTime = endTime;
+	public void setEnd_time(String end_time) {
+		this.end_time = end_time;
 	}
 	public String getStadium() {
 		return stadium;
@@ -122,40 +110,22 @@ public class MatchDetails {
 	public void setDelay(String delay) {
 		this.delay = delay;
 	}
-	public BiddingDetails getBid() {
-		return bid;
-	}
-	public void setBid(BiddingDetails bid) {
-		this.bid = bid;
-	}
-	
-	public List<BiddingDetails> getBiddingMatchId() {
-		return biddingMatchId;
-	}
-
-	public void setBiddingMatchId(List<BiddingDetails> biddingMatchId) {
-		this.biddingMatchId = biddingMatchId;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((bid == null) ? 0 : bid.hashCode());
-		result = prime * result + ((biddingMatchId == null) ? 0 : biddingMatchId.hashCode());
 		result = prime * result + ((date == null) ? 0 : date.hashCode());
 		result = prime * result + ((delay == null) ? 0 : delay.hashCode());
-		result = prime * result + ((endTime == null) ? 0 : endTime.hashCode());
+		result = prime * result + ((end_time == null) ? 0 : end_time.hashCode());
 		result = prime * result + matchId;
 		result = prime * result + ((stadium == null) ? 0 : stadium.hashCode());
-		result = prime * result + ((startTime == null) ? 0 : startTime.hashCode());
+		result = prime * result + ((start_time == null) ? 0 : start_time.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		result = prime * result + ((teamOne == null) ? 0 : teamOne.hashCode());
 		result = prime * result + ((teamTwo == null) ? 0 : teamTwo.hashCode());
 		result = prime * result + ((winner == null) ? 0 : winner.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -165,16 +135,6 @@ public class MatchDetails {
 		if (getClass() != obj.getClass())
 			return false;
 		MatchDetails other = (MatchDetails) obj;
-		if (bid == null) {
-			if (other.bid != null)
-				return false;
-		} else if (!bid.equals(other.bid))
-			return false;
-		if (biddingMatchId == null) {
-			if (other.biddingMatchId != null)
-				return false;
-		} else if (!biddingMatchId.equals(other.biddingMatchId))
-			return false;
 		if (date == null) {
 			if (other.date != null)
 				return false;
@@ -185,10 +145,10 @@ public class MatchDetails {
 				return false;
 		} else if (!delay.equals(other.delay))
 			return false;
-		if (endTime == null) {
-			if (other.endTime != null)
+		if (end_time == null) {
+			if (other.end_time != null)
 				return false;
-		} else if (!endTime.equals(other.endTime))
+		} else if (!end_time.equals(other.end_time))
 			return false;
 		if (matchId != other.matchId)
 			return false;
@@ -197,10 +157,10 @@ public class MatchDetails {
 				return false;
 		} else if (!stadium.equals(other.stadium))
 			return false;
-		if (startTime == null) {
-			if (other.startTime != null)
+		if (start_time == null) {
+			if (other.start_time != null)
 				return false;
-		} else if (!startTime.equals(other.startTime))
+		} else if (!start_time.equals(other.start_time))
 			return false;
 		if (status == null) {
 			if (other.status != null)
@@ -224,15 +184,12 @@ public class MatchDetails {
 			return false;
 		return true;
 	}
-
 	@Override
 	public String toString() {
 		return "MatchDetails [matchId=" + matchId + ", teamOne=" + teamOne + ", teamTwo=" + teamTwo + ", date=" + date
-				+ ", startTime=" + startTime + ", endTime=" + endTime + ", stadium=" + stadium + ", winner=" + winner
-				+ ", status=" + status + ", delay=" + delay + ", bid=" + bid + ", biddingMatchId=" + biddingMatchId
-				+ "]";
+				+ ", start_time=" + start_time + ", end_time=" + end_time + ", stadium=" + stadium + ", winner="
+				+ winner + ", status=" + status + ", delay=" + delay + "]";
 	}
-
 	
 	
 	

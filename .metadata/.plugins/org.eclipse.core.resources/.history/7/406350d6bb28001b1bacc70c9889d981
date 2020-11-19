@@ -1,0 +1,107 @@
+package com.org.dxc.controller;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.org.dxc.model.Admin;
+import com.org.dxc.model.Bidder;
+import com.org.dxc.model.BiddingDetails;
+import com.org.dxc.model.Leaderboard;
+import com.org.dxc.model.MatchDetails;
+import com.org.dxc.model.TeamDetails;
+import com.org.dxc.model.Tournament;
+import com.org.dxc.service.IPLService;
+
+@RestController
+@CrossOrigin(origins="http://localhost:4200")
+public class WebController {
+	
+	@Autowired
+	IPLService iplService;
+	
+	@GetMapping("/adminlogin/{userName}/{password}")
+	public boolean adminLogin(@PathVariable String userName,@PathVariable String password) {
+		Admin admin=iplService.adminLogin(userName,password);
+		if(admin!=null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	@PostMapping("/biddersignup")
+	public Bidder bidderSignUp(@RequestBody Bidder bidder) {
+		return iplService.bidderSignUp(bidder);
+	}
+	
+	@GetMapping("/bidderlogin/{email}/{password}")
+	public boolean bidderLogin(@PathVariable String email,@PathVariable String password) {
+		System.out.println(" "+email+" "+password);
+		Bidder bidder=iplService.bidderLogin(email,password);
+		if(bidder!=null) {
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	@GetMapping("/tournament")
+	public List<Tournament> getTournamentAll() {
+		return iplService.getTournamentAll();
+	}
+	
+	@PostMapping("/tournament")
+	public Tournament addTournament(@RequestBody Tournament tournament) {
+		return iplService.addTournament(tournament);
+	}
+	
+	@PutMapping("/tournament")
+	public Tournament updateTournament(@RequestBody Tournament tournament) {
+		return iplService.updateTournament(tournament);
+	}
+	
+	@GetMapping("/teamdetails/{id}")
+	public TeamDetails getTeamDetails(@PathVariable int id) {
+		return iplService.getTeamDetails(id);
+	}
+	
+	@GetMapping("/teamdetails/{name}")
+	public TeamDetails getTeamDetailsByName(@PathVariable String name) {
+		return iplService.getTeamDetailsByName(name);
+	}
+	
+	@GetMapping("/teamdetails")
+	public List<TeamDetails> getTeamDetails(){
+		return iplService.getTeamDetails();
+	}
+	
+	@GetMapping("/matchdetails/{id}")
+	public MatchDetails getMatchDetails(@PathVariable int id) {
+		return iplService.getMatchDetails(id);
+	}
+	
+	@GetMapping("/leaderboard")
+	public List<Leaderboard> getLeaderboard() {
+		return iplService.getLeaderboard();
+	}
+	
+	@GetMapping("/getBiddingDetails/{id}")
+	public BiddingDetails getBiddingDetails(@PathVariable int id) {
+		return null;
+	}
+	
+	@PutMapping("/result")
+	public MatchDetails resultDeclare(@RequestBody MatchDetails result) {
+		return iplService.resultDeclare(result);
+	}
+	
+}

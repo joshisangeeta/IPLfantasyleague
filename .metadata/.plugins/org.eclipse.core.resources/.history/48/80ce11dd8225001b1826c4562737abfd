@@ -1,0 +1,17 @@
+package com.org.dxc.service;
+
+import com.org.dxc.model.Admin;
+import com.org.dxc.model.Bidder;
+import com.org.dxc.model.Tournament;
+
+public interface IPLService {
+
+	public Admin adminLogin(int id);
+
+	public Bidder bidderSignUp(Bidder bidder);
+
+	public Bidder getBidderById(int id);
+
+	public Tournament getTournamentById(int id);
+
+}

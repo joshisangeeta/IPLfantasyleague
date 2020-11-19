@@ -1,0 +1,210 @@
+package com.org.dxc.controller;
+
+import java.util.List;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.org.dxc.model.Admin;
+import com.org.dxc.model.Bidder;
+import com.org.dxc.model.Leaderboard;
+import com.org.dxc.model.MatchDetails;
+import com.org.dxc.model.TeamDetails;
+import com.org.dxc.model.Tournament;
+import com.org.dxc.service.IPLService;
+
+@RestController
+@CrossOrigin(origins="http://localhost:4200")
+public class WebController {
+	
+	@Autowired
+	IPLService iplService;
+	
+	@Autowired
+	HttpSession session;
+	
+	@GetMapping("/adminlogin/{userName}/{password}")
+	public boolean adminLogin(@PathVariable String userName,@PathVariable String password) {
+		Admin admin=iplService.adminLogin(userName,password);
+		if(admin!=null) {
+			session.setAttribute("username", admin.getUserName());
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+	
+	@PostMapping("/biddersignup")
+	public Bidder bidderSignUp(@RequestBody Bidder bidder) {
+		return iplService.bidderSignUp(bidder);
+	}
+	
+	@GetMapping("/bidderlogin/{email}/{password}")
+	public boolean bidderLogin(@PathVariable String email,@PathVariable String password) {
+		Bidder bidder=iplService.bidderLogin(email,password);
+		if(bidder!=null) {
+			session.setAttribute("email", bidder.getEmail());
+			return true;
+		}else {
+			return false;
+		}
+	}
+	
+	@GetMapping("/tournament")
+	public List<Tournament> getTournamentAll() {
+		return iplService.getTournamentAll();
+	}
+	
+	@PostMapping("/tournament")
+	public Tournament addTournament(@RequestBody Tournament tournament) {
+		return iplService.addTournament(tournament);
+	}
+	
+	@PutMapping("/tournament")
+	public Tournament updateTournament(@RequestBody Tournament tournament) {
+		return iplService.updateTournament(tournament);
+	}
+	
+	@GetMapping("/teamdetails/{id}")
+	public TeamDetails getTeamDetails(@PathVariable int id) {
+		if(session.getAttribute("username")!=null || session.getAttribute("email")!=null) {
+		return iplService.getTeamDetails(id);
+		}else {
+			return null;
+		}
+	}
+	
+	@GetMapping("/teamdetails/{name}")
+	public TeamDetails getTeamDetailsByName(@PathVariable String name) {
+		if(session.getAttribute("username")!=null || session.getAttribute("email")!=null) {
+		return iplService.getTeamDetailsByName(name);
+		}else {
+			return null;
+		}
+	}
+	
+	@GetMapping("/teamdetails")
+	public List<TeamDetails> getTeamDetails(){
+		if(session.getAttribute("username")!=null || session.getAttribute("email")!=null) {
+		return iplService.getTeamDetails();
+		}else {
+			return null;
+		}
+	}
+	
+	@GetMapping("/matchdetails/{id}")
+	public MatchDetails getMatchDetails(@PathVariable int id) {
+		if(session.getAttribute("username")!=null || session.getAttribute("email")!=null) {
+		return iplService.getMatchDetails(id);
+		}else {
+			return null;
+		}
+	}
+	
+	@GetMapping("/leaderboard")
+	public List<Leaderboard> getLeaderboard() {
+		if(session.getAttribute("username")!=null || session.getAttribute("email")!=null) {
+		return iplService.getLeaderboard();
+		}else {
+			return null;
+		}
+	}
+	
+	 @GetMapping("/leaderboard/{id}")
+	    public Leaderboard getBidderById(@PathVariable int id) {
+		 if(session.getAttribute("username")!=null || session.getAttribute("email")!=null) {
+	        return iplService.bidderById(id);
+		 }else {
+				return null;
+			}
+	        
+	    }
+	    
+	@PostMapping(value="/leaderboard")
+	public Leaderboard updateLeaderboard(@RequestBody Leaderboard leaderboard) {
+		if(session.getAttribute("username")!=null || session.getAttribute("email")!=null) {
+	    return iplService.updateLeaderboard(leaderboard);
+		}else {
+			return null;
+		}
+	}
+	
+	@PutMapping("/result")
+	public MatchDetails resultDeclare(@RequestBody MatchDetails result) {
+		if(session.getAttribute("username")!=null || session.getAttribute("email")!=null) {
+		return iplService.resultDeclare(result);
+		}else {
+			return null;
+		}
+	}
+	
+	  @GetMapping("/pointstable")
+	    public List<com.org.dxc.model.TeamDetails>getPointstable(){
+		  if(session.getAttribute("username")!=null || session.getAttribute("email")!=null) {
+	        return iplService.getPointstable();
+		  }else {
+				return null;
+			}
+	        
+	    }
+	    @GetMapping("/pointstable/{id}")
+	    public TeamDetails getPointstableById(@PathVariable int id) {
+	    	if(session.getAttribute("username")!=null || session.getAttribute("email")!=null) {
+	        return iplService.pointstableById(id);
+	    	}else {
+				return null;
+			}
+	        
+	    }
+	    @PostMapping("/pointstable")
+	    public TeamDetails updatePointstable(@RequestBody TeamDetails pointstable) {
+	    	if(session.getAttribute("username")!=null || session.getAttribute("email")!=null) {
+	        return iplService.updatePointstable(pointstable);
+	    	}else {
+				return null;
+			}
+	    }
+	    
+	    @GetMapping("/match")
+	    public List<MatchDetails> getMatches(){
+	    	if(session.getAttribute("username")!=null || session.getAttribute("email")!=null) {
+	        return iplService.getAllMatches();
+	    	}else {
+				return null;
+			}
+	       
+	    }
+	    @GetMapping("/match/{id}")
+	    public MatchDetails getMatchById(@PathVariable int id) {
+	    	if(session.getAttribute("username")!=null || session.getAttribute("email")!=null) {
+	        return iplService.MatchById(id);
+	    	}else {
+				return null;
+			}
+	    }
+	    @PutMapping("/match")
+	    public MatchDetails updateTeam(@RequestBody MatchDetails md) {
+	    	if(session.getAttribute("username")!=null || session.getAttribute("email")!=null) {
+	        return iplService.updateMatch(md);
+	    	}else {
+				return null;
+			}
+	       
+	    }
+	    
+	    @RequestMapping("/logout")
+	    public void logout() {
+	    	session.invalidate();
+	    }
+	
+}

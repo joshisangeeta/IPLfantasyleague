@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
-    <typeInfo handle="=IPL-Fantasy-League/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.org.dxc.service{IPLService.java[IPLService" modifiers="513" timestamp="1605099341025"/>
+    <typeInfo handle="=IPL-Fantasy-League/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.org.dxc.service{IPLService.java[IPLService" modifiers="513" timestamp="1605715315378"/>
+    <typeInfo handle="=IPL-Fantasy-League/C:\/Users\/nsingh306\/.m2\/repository\/org\/springframework\/data\/spring-data-jpa\/2.3.5.RELEASE\/spring-data-jpa-2.3.5.RELEASE.jar=/maven.pomderived=/true=/=/maven.pomderived=/true=/=/maven.groupId=/org.springframework.data=/=/maven.artifactId=/spring-data-jpa=/=/maven.version=/2.3.5.RELEASE=/=/maven.scope=/compile=/&lt;org.springframework.data.jpa.repository(JpaRepository.class[JpaRepository" modifiers="1537" timestamp="1604118351786"/>
 </typeInfoHistroy>
